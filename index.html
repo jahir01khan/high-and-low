@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Guess the Number Game</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    img {
+      display: block;
+      margin: 20px auto;
+      width: 500px;
+    }
+    input[type="number"] {
+      padding: 10px;
+      font-size: 16px;
+      width: 60px;
+      text-align: center;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+    .message {
+      font-size: 24px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Guess a number between 1 and 9</h1>
+
+  <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExaDdianZtMWlsaHpvbzd0YmNuMWlkczN2ZzZ3a3VvcjJ6ZDlyNGs4dSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7aCSPqXE5C6T8tBC/giphy.gif" alt="Thinking">
+
+  <h2>How to play this game?</h2>
+  <p><b>1. Try to guess a number between 1 and 9</b></p>
+  <p><b>2. Enter the number below and click Guess</b></p>
+  <p><b>3. If the answer is correct, too low, or too high it will be shown below. Good luck!</b></p>
+
+  <input type="number" id="guess" min="1" max="9">
+  <button onclick="checkGuess()">Guess</button>
+
+  <div id="result" class="message"></div>
+  <div id="gif"></div>
+
+  <script>
+    const randomNumber = Math.floor(Math.random() * 9) + 1;
+    // console.log("Random Number:", randomNumber); // Uncomment for testing
+
+    function checkGuess() {
+      const guess = parseInt(document.getElementById('guess').value);
+      const result = document.getElementById('result');
+      const gif = document.getElementById('gif');
+
+      if (!guess || guess < 1 || guess > 9) {
+        result.innerHTML = "Please enter a number between 1 and 9.";
+        gif.innerHTML = "";
+        return;
+      }
+
+      if (guess === randomNumber) {
+        result.innerHTML = "<span style='color: green;'>Correct! You found me.</span>";
+        gif.innerHTML = `<img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmw1ZnMzZ3IxbDZtY3gxbDd5ODl5azUyOXRmdDB5aTE5a251cGZ2biZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/4T7e4DmcrP9du/giphy.gif">`;
+      } else if (guess > randomNumber) {
+        result.innerHTML = "<span style='color: red;'>Too high! Try again.</span>";
+        gif.innerHTML = `<img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGRtc3ZvenlnZWt0a200cmZsejJ2enlseWd3MXhqMDZtOGdidzNiZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6ZtaO9BZHcOjmErm/giphy.gif">`;
+      } else {
+        result.innerHTML = "<span style='color: blue;'>Too low! Try again.</span>";
+        gif.innerHTML = `<img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExOGZ3anhnZWpwNDhqMHo2a3EyaWRzaHFiMWY3dXN3bGdpYnZ1OGJucCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/jD4DwBtqPXRXa/giphy.gif">`;
+      }
+    }
+  </script>
+
+</body>
+</html>
